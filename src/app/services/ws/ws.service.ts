@@ -12,7 +12,7 @@ export class WsService {
 
   url: string = 'http://localhost:80/jwt';
 
-  constructor(public http: Http)
+  constructor(public http: Http, private authHttp: AuthHttp)
   {
 
   }
@@ -34,13 +34,13 @@ export class WsService {
    * Para hacer peticines autenticado.
    * @param user 
    */
-  // getJwt(user: Object)
-  // {
-  //   return this.authHttp.get(this.url, user)
-  //   .toPromise()
-  //   .then( this.extractData )
-  //   .catch( this.handleError );
-  // }
+  getJwt(url, user: Object)
+  {
+    return this.authHttp.get(url, user)
+    .toPromise()
+    .then( this.extractData )
+    .catch( this.handleError );
+  }
 
   private extractData(res: Response) {
     let body = res.json();    
